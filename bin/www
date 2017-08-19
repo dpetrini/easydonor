@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+const app = require('../app');
+
+const server = app.listen(3000, function () {
+	const host = server.address().address;
+	const port = server.address().port;
+	console.log('Example app listening at http://%s:%s', host, port);
+});
+
+/*
+ Socket io
+*/
+
+const io = require('socket.io')(server);
+
+var sendComments = function (socket) {
+	fs.readFile('_comments.json', 'utf8', function(err, comments) {
+		comments = JSON.parse(comments);
+		socket.emit('comments', comments);
+	});
+};
+
+
+io.on('connection', socket => {
+	console.log('New client connected!');
+
+	socket.on('subscribeToTimer', interval => {
+		console.log('client is subscribing to timer with interval ', interval);
+
+		setInterval(() => {
+			socket.emit('timer', new Date());
+		}, interval);
+	});
+
+
+	socket.on('i-have-new-donor', id => {
+		console.log('client has new Donor ', id);
+
+		socket.broadcast.emit('newDonor', id);
+
+	});
+
+
+	socket.on('subscribeToDonorEasy', ip => {
+		console.log('client is subscribing to subscribeToDonorEasy with IP ', ip);
+
+		let idList = '5994b3f10142522a54fd2e1f';
+
+		//Just test, nobody is listening normally
+		setInterval(() => {
+			socket.emit('newDonorTest', idList);
+		}, 5000);
+	});
+
+});
+

@@ -1570,7 +1570,7 @@ function navGeoPosition(cb) {
     cb(err);
   }
 
-  navigator.geolocation.getCurrentPosition(success.bind(this), error, options);
+  navigator.geolocation.getCurrentPosition(success.bind(this), error.bind(this), options);
 }
 
 exports.navGeoPosition = navGeoPosition;

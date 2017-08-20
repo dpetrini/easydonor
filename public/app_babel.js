@@ -134,13 +134,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // Send props coordinates
 var Coords = {
-  lat: '-3',
-  long: '-30'
+  lat: '-23.54',
+  long: '-46.59'
 };
 
 function update(lat, long) {
-  Coords.lat = lat;
-  Coords.long = long;
+  if (lat != undefined) {
+    Coords.lat = lat;
+    Coords.long = long;
+  }
   console.log("COORDS: " + Coords.lat, Coords.long);
 }
 
@@ -673,7 +675,7 @@ var MainMap = function (_Component) {
 
     _this.state = {
       myViewProperties: {
-        scale: 5000,
+        scale: 50000,
         center: [props.long, props.lat]
       },
       closestDonor: {
@@ -706,10 +708,24 @@ var MainMap = function (_Component) {
 
       var newViewProperties = _this.state.myViewProperties;
 
-      var originalCenter = [long, lat];
+      var originalCenter = _this.state.originalCenter;
+
+      // User didn´t provided or browser didn´t allow
+      if (err) {
+        console.log("erro, vou sair", lat, long);
+
+        _this.setState({
+          myViewProperties: newViewProperties,
+          originalCenter: originalCenter
+        });
+
+        return;
+      }
+
+      // User provided a coordinate
+      originalCenter = [long, lat];
 
       newViewProperties.center = [long, lat];
-      newViewProperties.scale = 50000;
 
       _this.setState({
         myViewProperties: newViewProperties,

@@ -138,17 +138,18 @@ var Coords = {
   long: '-46.59'
 };
 
-function update(lat, long) {
-  if (lat != undefined) {
-    Coords.lat = lat;
-    Coords.long = long;
-  }
-  console.log("COORDS: " + Coords.lat, Coords.long);
-}
+// function update (lat, long) {
+//   if (lat != undefined) {
+//     Coords.lat = lat;
+//     Coords.long = long;
+//   }
+//   console.log("COORDS: "+Coords.lat, Coords.long)
 
-(0, _geo.navGeoPosition)(function (err, lat, long) {
-  return update(lat, long);
-});
+// }
+
+// navGeoPosition((err, lat, long) => update(
+//   lat, long, 
+// )); 
 
 var Body = function (_Component) {
   _inherits(Body, _Component);

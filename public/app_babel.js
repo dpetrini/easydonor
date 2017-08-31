@@ -196,6 +196,8 @@ var About = function (_Component) {
                 _react2.default.createElement('br', null),
                 'If you wish you can check original code by "grunt watch" after "npm install" in delivered client code, or please contact me.',
                 _react2.default.createElement('br', null),
+                'This new code, please find at: https://github.com/dpetrini/react-easydonor',
+                _react2.default.createElement('br', null),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                   'strong',

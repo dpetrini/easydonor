@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1 #{title}
+  p Welcome to Donor system for edit (or delete) your information. Please make your changes (or select option to delete) then press Submit button.
+
+  form(method='POST' action='')
+    div.form-group
+        p First name:
+            input(type='text', name='firstName' value=(undefined===donors.firstName? '' : donors.firstName))
+        p Last name:
+            input(type='text', name='lastName' value=(undefined===donors.lastName? '' : donors.lastName))
+        p Contact number:
+            input(type='text', name='contactNumber' value=(undefined===donors.contactNumber? '' : donors.contactNumber))  
+        p Email Address:
+            input(type='email', name='emailAddress' value=(undefined===donors.emailAddress? '' : donors.emailAddress))
+        p Blood Type:
+            input(type='text', name='bloodGroup' value=(undefined===donors.bloodGroup? '' : donors.bloodGroup))
+        label.checkbox.
+            <input type="checkbox" name=delete value="delete-yes" /> Check if you want to delete your info
+        p
+        
+
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

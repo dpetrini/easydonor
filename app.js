@@ -9,10 +9,15 @@ const debug = require('debug')('app.js');
 const express = require('express');
 const methodOverride  = require('method-override');
 const bodyParser      = require('body-parser');
+var expressValidator = require('express-validator');
 const cors = require('cors');
 
 const app = express();
 const path = require('path');
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 // server config
 app.use(methodOverride('X­HTTP­Method'));
@@ -25,6 +30,7 @@ app.options('*', cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator()); // To perform form validation
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'public')));

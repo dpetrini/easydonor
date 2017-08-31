@@ -15,6 +15,8 @@ router.use('/donors', require('./donors'));
 // Overall check
 router.use('/check', require('./check'));
 
+// Render views
+router.use('/users', require('./users'));
 
 module.exports = router;
 
